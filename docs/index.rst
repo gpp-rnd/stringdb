@@ -7,7 +7,7 @@ Welcome to stringdb's documentation!
 
    readme
    installation
-   usage
+   basic_usage
    modules
    contributing
    authors
