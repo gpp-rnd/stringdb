@@ -14,3 +14,7 @@ History
 0.1.2 (2020-06-24)
 ------------------
 * Setup travis pypi release
+
+0.1.3 (2020-06-24)
+------------------
+* Setup travis pypi release
