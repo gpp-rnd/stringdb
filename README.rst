@@ -6,7 +6,7 @@ stringdb
 .. image:: https://img.shields.io/pypi/v/stringdb.svg
         :target: https://pypi.python.org/pypi/stringdb
 
-.. image:: https://img.shields.io/travis/gpp-rnd/stringdb.svg
+.. image:: https://api.travis-ci.com/gpp-rnd/stringdb.svg
         :target: https://travis-ci.com/gpp-rnd/stringdb
 
 .. image:: https://readthedocs.org/projects/stringdb/badge/?version=latest
