@@ -240,7 +240,7 @@ def get_enrichment(identifiers, background_string_identifiers=None, species=9606
         "caller_identity": caller_identity,
     }
     if background_string_identifiers is not None:
-        params['background_string_identifiers'] = background_string_identifiers
+        params['background_string_identifiers'] = "\r".join(background_string_identifiers)
     results = requests.post(request_url, data=params)
     df = handle_results(results)
     return df
