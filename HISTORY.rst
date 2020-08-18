@@ -2,6 +2,11 @@
 History
 =======
 
+0.1.5 (2020-08-18)
+------------------
+
+* Allow for background identifiers in enrichment analysis
+
 0.1.4 - 0.1.2 (2020-06-24)
 --------------------------
 
