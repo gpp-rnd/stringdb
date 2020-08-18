@@ -44,3 +44,6 @@ def test_interaction_partners(mapped_ddr_ids):
 def test_enrichment(mapped_ddr_ids):
     enrichment_df = stringdb.get_enrichment(mapped_ddr_ids.stringId)
     assert enrichment_df.sort_values('fdr')['term'].values[0] == 'PMID.22918243'
+    background_enrichment = stringdb.get_enrichment(mapped_ddr_ids.stringId,
+                                                    background_string_identifiers=mapped_ddr_ids.stringId)
+    assert background_enrichment.shape[0] == 0
