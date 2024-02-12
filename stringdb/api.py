@@ -1,4 +1,4 @@
-"""api module. Functions to access the STRING API"""
+"""api module. Functions to access the STRING API."""
 import pandas as pd
 import io
 import requests
@@ -12,8 +12,9 @@ def build_request_url(method, output_format='tsv'):
     Parameters
     ----------
     method: str
-        options - get_string_ids, network, interaction_partners, homology, homology_best,
-            enrichment, functional_annotation, ppi_enrichment, version
+        options - get_string_ids, network, interaction_partners, homology,
+        homology_best, enrichment, functional_annotation, ppi_enrichment,
+        version
     output_format: str, optional
         options - tsv, tsv-non-header, json, xml
 
@@ -73,8 +74,11 @@ def get_string_ids(identifiers, species=9606, limit=1, echo_query=1,
     return df
 
 
-def get_functional_annotation(identifiers, species=9606, caller_identity='https://github.com/gpp-rnd/stringdb',
-                              allow_pubmed=0):
+def get_functional_annotation(
+        identifiers,
+        species=9606,
+        caller_identity='https://github.com/gpp-rnd/stringdb',
+        allow_pubmed=0):
     """Get all pathways for a list of string ids
 
     Parameters
@@ -111,8 +115,12 @@ def get_functional_annotation(identifiers, species=9606, caller_identity='https:
     return pathway_df
 
 
-def get_network(identifiers, species=9606, required_score=400,
-                caller_identity='https://github.com/gpp-rnd/stringdb', add_nodes=0):
+def get_network(identifiers,
+                species=9606,
+                required_score=400,
+                network_type="physical",
+                caller_identity='https://github.com/gpp-rnd/stringdb',
+                add_nodes=0):
     """Get the ppi network for a list of string ids
 
     Parameters
@@ -122,7 +130,11 @@ def get_network(identifiers, species=9606, required_score=400,
     species: int, optional
         species NCBI identifier
     required_score: int, optional
-        score cutoff for edges, corresponds to probability of belonging to same kegg pathway
+        score cutoff for edges, corresponds to probability of belonging
+        to same kegg pathway
+    network_type: str, optional
+        type of interactions in the network.
+        options - functional (default), physical
     caller_identity: str, optional
         personal identifier for string
     add_nodes: int, optional
@@ -139,6 +151,7 @@ def get_network(identifiers, species=9606, required_score=400,
         "species": species,  # species NCBI identifier
         "caller_identity": caller_identity,
         "required_score": required_score,
+        "network_type": network_type,
         "add_nodes": add_nodes
     }
     results = requests.post(request_url, data=params)
@@ -157,7 +170,8 @@ def get_ppi_enrichment(identifiers, species=9606, required_score=400,
     species: int, optional
         species NCBI identifier
     required_score: int, optional
-        score cutoff for edges, corresponds to probability of belonging to same kegg pathway
+        score cutoff for edges, corresponds to probability of belonging
+        to same kegg pathway
     caller_identity: str, optional
         personal identifier for string
 
@@ -178,8 +192,9 @@ def get_ppi_enrichment(identifiers, species=9606, required_score=400,
     return df
 
 
-def get_interaction_partners(identifiers, species=9606, required_score=400,
-                             limit=None, caller_identity='https://github.com/gpp-rnd/stringdb'):
+def get_interaction_partners(
+        identifiers, species=9606, required_score=400, limit=None,
+        caller_identity='https://github.com/gpp-rnd/stringdb'):
     """Get interactions for identified proteins and all other string proteins
 
     Parameters
@@ -189,9 +204,11 @@ def get_interaction_partners(identifiers, species=9606, required_score=400,
     species: int, optional
         species NCBI identifier
     required_score: int, optional
-        score cutoff for edges, corresponds to probability of belonging to same kegg pathway
+        score cutoff for edges, corresponds to probability of belonging
+        to same kegg pathway
     limit: int, optional
-        limit the number of interactors returned for each protein, ranked by score
+        limit the number of interactors returned for each protein,
+        ranked by score
     caller_identity: str, optional
         personal identifier for string
 
@@ -213,7 +230,8 @@ def get_interaction_partners(identifiers, species=9606, required_score=400,
     return df
 
 
-def get_enrichment(identifiers, background_string_identifiers=None, species=9606,
+def get_enrichment(identifiers, background_string_identifiers=None,
+                   species=9606,
                    caller_identity='https://github.com/gpp-rnd/stringdb'):
     """Get functional enrichment for a list of proteins
 
@@ -240,7 +258,8 @@ def get_enrichment(identifiers, background_string_identifiers=None, species=9606
         "caller_identity": caller_identity,
     }
     if background_string_identifiers is not None:
-        params['background_string_identifiers'] = "\r".join(background_string_identifiers)
+        params['background_string_identifiers'] = "\r".join(
+            background_string_identifiers)
     results = requests.post(request_url, data=params)
     df = handle_results(results)
     return df
